@@ -9,15 +9,20 @@ int reps = 6;
 
 void writeUsingFile(string fileName) {
   ofstream writer(fileName, ios_base::binary);
-  for (int i = 1; i <= numOfNums; ++i)
+  for (int i = 1; i <= numOfNums; ++i) {
     writer << (uint8_t) (i & 0xff);
+    //writer.put(i & 0xff);  // better option 1
+  }
 }
 
 void readUsingFile(string fileName) {
   ifstream reader(fileName, ios_base::binary);
   uint8_t c;
-  for (int i = 1; i <= numOfNums; ++i) 
+  //char c;  // better option 1
+  for (int i = 1; i <= numOfNums; ++i) {
     reader >> c;
+    //reader.get(c);  // better option 1
+  }
   remove(fileName.c_str());
 }
 
@@ -50,6 +55,8 @@ int main(int argc, char* argv[]) {
     }
   } 
   int tmp1 = reps - 1;
-  cout << "Bytes: " << numOfNums / 1024 / 1024 << " MiB, ReadRate: " << \
-    read / tmp1 << "MB/s, WriteRate: " << write / tmp1 << " MB/s" << endl;
+  cout << "Bytes: " << numOfNums / 1024 / 1024 \
+    << " MiB, ReadRate: " << read / tmp1 \
+    << "MB/s, WriteRate: " << write / tmp1 \
+    << " MB/s" << endl;
 }
